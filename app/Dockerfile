@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM --platform=amd64 python:3.8-slim-buster
 
 WORKDIR /python-docker
 
