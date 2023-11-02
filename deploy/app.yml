@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insecure-devops
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: insecure-devops
+  template:
+    metadata:
+      labels:
+        app: insecure-devops
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - image: harbor.calif-challenge.com/devops/insecure-devops:latest
+          name: insecure-devops
+          ports:
+            - containerPort: 31337
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: insecure-devops-service
+spec:
+  selector:
+    app: insecure-devops
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 31337
+ 
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: insecure-devops
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - insecure-devops.calif-challenge.com
+    secretName: insecure-devops.calif-challenge.com-secret
+  rules:
+  - host: insecure-devops.calif-challenge.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: insecure-devops-service
+            port:
+              number: 80
+  
