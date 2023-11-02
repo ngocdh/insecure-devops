@@ -16,6 +16,7 @@ spec:
         - name: regcred
       containers:
         - image: harbor.calif-challenge.com/devops/insecure-devops:latest
+          imagePullPolicy: Always
           name: insecure-devops
           ports:
             - containerPort: 31337
