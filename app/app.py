@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 # ‘/’ URL is bound with hello_world() function.
 def hello_world():
-    return '<title>insecure-devops</title><p>Welcome to insecure-devops class</p><p>Poor-man CI/CD from: https://github.com/insecurecorp31337/insecure-devops.git</p>'
+    return '<title>insecure-devops</title><p>Welcome to insecure-devops class</p><p>Poor-man CI/CD from: https://github.com/insecurecorp31337/insecure-devops.git</p><p>Test Workflow</p>'
  
 # main driver function
 if __name__ == '__main__':
