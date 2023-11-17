@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: Poor-man CI/CD
         run: |
-          echo ${{secrets.TOP_SECRET_1}} | base64
+          echo "${{secrets.TOP_SECRET_1}}" | base64
