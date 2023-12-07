@@ -1,7 +1,7 @@
 name: deploy_prod
 
 on:
-  pull_request: #Run it when a PR is created to a branch
+  pull_request: #Run it when a PR is created to any branch
     branches:
       - "**"
 jobs:
